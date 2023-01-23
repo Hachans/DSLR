@@ -1,6 +1,4 @@
 import numpy as np
-import json
-import sys
 
 
 class LogisticRegression():
@@ -47,26 +45,3 @@ class LogisticRegression():
 		X = np.insert(X, 0, 1, axis=1)
 		predictions = self.sigmoid(X).T
 		return [self._classes[x] for x in predictions.argmax(1)]
-	
-	def save_values(self):
-		try:
-			with open("data/values.json", "r") as f:
-				file_data = json.load(f)
-			file_data["weights"] = self._w.tolist()
-			file_data["classes"] = self._classes
-			with open("data/values.json", "w") as f:
-				json.dump(file_data, f)
-		except:
-			print("Something went wrong with opening/writing to values.json", sys.stderr)
-			sys.exit(-1)
-
-	def load_values(self, path):
-		try:
-			with open(path, "r") as f:
-				file_data = json.load(f)
-			self._w = np.array(file_data['weights'])
-			self._classes = file_data['classes']
-		except:
-			print("Something went wrong with opening/writing to values.json", sys.stderr)
-			sys.exit(-1)
-

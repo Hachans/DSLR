@@ -35,7 +35,6 @@ def main():
 			k += 1
 		j += 1
 
-	plt.yticks(rotation=90)
 	fig.tight_layout()
 
 	plt.show()
